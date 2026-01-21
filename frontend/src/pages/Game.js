@@ -43,7 +43,8 @@ const Game = () => {
 
     const fetchGame = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/subjects/${slug}/questions/game`, { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            const res = await axios.get(`${API_URL}/subjects/${slug}/questions/game`, { withCredentials: true });
             if (res.data.length < 12) {
                 setGameState('error');
             } else {
@@ -79,7 +80,8 @@ const Game = () => {
         }
 
         try {
-            await axios.post('http://localhost:5000/api/game/submit', {
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            await axios.post(`${API_URL}/game/submit`, {
                 subject_slug: slug,
                 score,
                 answers: history

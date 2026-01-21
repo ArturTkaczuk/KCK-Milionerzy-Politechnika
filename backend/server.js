@@ -10,7 +10,23 @@ const PORT = process.env.PORT || 5000;
 
 // Programy pośredniczące (Middleware)
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'], // Adresy URL Frontendu
+    origin: function (origin, callback) {
+        // Pozwól na żądania bez 'origin' (np. aplikacje mobilne lub postman)
+        if (!origin) return callback(null, true);
+
+        // Sprawdź czy origin jest dozwolony (localhost lub LAN IP na porcie 3000)
+        // Dla uproszczenia developerskiego, pozwalamy na wszystko co kończy się na :3000
+        if (origin.endsWith(':3000')) {
+            return callback(null, true);
+        } else {
+            // W trybie developerskim pozwólmy na wszystko (niebezpieczne na prod!)
+            // Lepsze rozwiązanie: sprawdź czy to IP z sieci lokalnej (192.168.x.x)
+            if (origin.includes('192.168.') || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+                return callback(null, true);
+            }
+            return callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));

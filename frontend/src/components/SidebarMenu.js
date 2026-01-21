@@ -18,7 +18,8 @@ const SidebarMenu = ({ show, handleClose }) => {
         setLoading(true);
         try {
             console.log("Fetching leaderboard...");
-            const res = await axios.get('http://localhost:5000/api/leaderboard', { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            const res = await axios.get(`${API_URL}/leaderboard`, { withCredentials: true });
             console.log("Leaderboard data:", res.data);
             setLeaderboard(res.data);
         } catch (err) {
@@ -95,7 +96,8 @@ const HistorySection = () => {
     const fetchHistory = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/history', { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            const res = await axios.get(`${API_URL}/history`, { withCredentials: true });
             setGames(res.data);
         } catch (err) {
             console.error(err);
@@ -112,7 +114,8 @@ const HistorySection = () => {
         setSelectedGameId(gameId);
         setDetailsLoading(true);
         try {
-            const res = await axios.get(`http://localhost:5000/api/history/${gameId}`, { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            const res = await axios.get(`${API_URL}/history/${gameId}`, { withCredentials: true });
             setGameDetails(res.data);
         } catch (err) {
             console.error(err);

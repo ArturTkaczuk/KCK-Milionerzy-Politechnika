@@ -23,7 +23,8 @@ const SubjectSelection = () => {
 
     const fetchSubjects = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/subjects', { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            const res = await axios.get(`${API_URL}/subjects`, { withCredentials: true });
             setSubjects(res.data);
         } catch (err) {
             console.error(err);

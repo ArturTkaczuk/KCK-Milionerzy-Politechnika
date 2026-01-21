@@ -32,7 +32,8 @@ const AdminDashboard = () => {
 
     const fetchSubjects = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/subjects', { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            const res = await axios.get(`${API_URL}/subjects`, { withCredentials: true });
             setSubjects(res.data);
         } catch (err) {
             console.error(err);
@@ -41,7 +42,8 @@ const AdminDashboard = () => {
 
     const fetchQuestions = async (slug) => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/subjects/${slug}/questions`, { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            const res = await axios.get(`${API_URL}/subjects/${slug}/questions`, { withCredentials: true });
             setQuestions(res.data);
         } catch (err) {
             console.error(err);
@@ -52,7 +54,8 @@ const AdminDashboard = () => {
         e.preventDefault();
         const slug = newSubjectName.toLowerCase().replace(/ /g, '-').replace(/[^\w-]/g, '');
         try {
-            await axios.post('http://localhost:5000/api/subjects', { name: newSubjectName, slug }, { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            await axios.post(`${API_URL}/subjects`, { name: newSubjectName, slug }, { withCredentials: true });
             setNewSubjectName('');
             fetchSubjects();
         } catch (err) {
@@ -71,13 +74,14 @@ const AdminDashboard = () => {
                 difficulty: parseInt(qForm.difficulty)
             };
 
+            const API_URL = `http://${window.location.hostname}:5000/api`;
             if (editingQuestion) {
                 // AKTUALIZACJA
-                await axios.put(`http://localhost:5000/api/questions/${editingQuestion.id}`, payload, { withCredentials: true });
+                await axios.put(`${API_URL}/questions/${editingQuestion.id}`, payload, { withCredentials: true });
                 alert('Pytanie zaktualizowane!');
             } else {
                 // UTWÓRZ
-                await axios.post(`http://localhost:5000/api/subjects/${selectedSubject.slug}/questions`, payload, { withCredentials: true });
+                await axios.post(`${API_URL}/subjects/${selectedSubject.slug}/questions`, payload, { withCredentials: true });
                 alert('Pytanie utworzone!');
             }
 
@@ -92,7 +96,8 @@ const AdminDashboard = () => {
     const handleDeleteQuestion = async (id) => {
         if (!window.confirm("Czy na pewno chcesz usunąć to pytanie?")) return;
         try {
-            await axios.delete(`http://localhost:5000/api/questions/${id}`, { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            await axios.delete(`${API_URL}/questions/${id}`, { withCredentials: true });
             fetchQuestions(selectedSubject.slug);
         } catch (err) {
             alert('Błąd usuwania pytania');
@@ -118,7 +123,8 @@ const AdminDashboard = () => {
     const handleDeleteSubject = async (id) => {
         if (!window.confirm("Czy na pewno chcesz usunąć ten przedmiot? To usunie WSZYSTKIE powiązane pytania.")) return;
         try {
-            await axios.delete(`http://localhost:5000/api/subjects/${id}`, { withCredentials: true });
+            const API_URL = `http://${window.location.hostname}:5000/api`;
+            await axios.delete(`${API_URL}/subjects/${id}`, { withCredentials: true });
             fetchSubjects();
             setSelectedSubject(null);
         } catch (err) {

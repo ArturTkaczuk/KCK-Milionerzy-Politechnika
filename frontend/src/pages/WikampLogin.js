@@ -14,8 +14,9 @@ const WikampLogin = () => {
     React.useEffect(() => {
         const fetchData = async () => {
             try {
+                const API_URL = `http://${window.location.hostname}:5000/api`;
                 // Pobierz Przedmioty
-                const subRes = await fetch('http://localhost:5000/api/subjects');
+                const subRes = await fetch(`${API_URL}/subjects`);
                 if (subRes.ok) {
                     const data = await subRes.json();
                     setSubjects(data);
@@ -23,7 +24,7 @@ const WikampLogin = () => {
                 }
 
                 // Pobierz Użytkowników
-                const userRes = await fetch('http://localhost:5000/api/users');
+                const userRes = await fetch(`${API_URL}/users`);
                 if (userRes.ok) {
                     const data = await userRes.json();
                     setUsers(data);

@@ -8,8 +8,9 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const fetchUser = async () => {
+        const API_URL = `http://${window.location.hostname}:5000/api`;
         try {
-            const res = await axios.get('http://localhost:5000/api/me', { withCredentials: true });
+            const res = await axios.get(`${API_URL}/me`, { withCredentials: true });
             setUser(res.data);
         } catch (err) {
             setUser(null);

@@ -59,10 +59,7 @@ const WikampLogin = () => {
                         <h2 className="mb-0">Logowanie Wikamp</h2>
                     </Card.Header>
                     <Card.Body className="p-4">
-                        <Alert variant="info" className="mb-4">
-                            <i className="bi bi-info-circle me-2"></i>
-                            Wybierz użytkownika i przedmiot aby rozpocząć.
-                        </Alert>
+
 
                         <Form.Group className="mb-4">
                             <Form.Label className="fw-bold">Wybierz użytkownika</Form.Label>

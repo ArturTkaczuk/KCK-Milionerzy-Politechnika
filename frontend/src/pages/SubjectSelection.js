@@ -46,13 +46,13 @@ const SubjectSelection = () => {
                         <p>Przekierowanie do logowania...</p>
                     </div>
                 ) : (
-                    <div className="mb-4 d-flex justify-content-between align-items-center">
-                        <h5>Witaj, <span className="text-primary">{user.name}</span> ({user.role})</h5>
-                        <div>
-                            <Button variant="outline-danger" size="sm" onClick={logout} className="me-2">Wyloguj</Button>
-                            <Button variant="outline-secondary" size="sm" onClick={() => setShowMenu(true)}>
+                    <div className="mb-5 text-start">
+                        <h4 className="mb-3">Witaj, <span className="text-primary">{user.name}</span> ({user.role})</h4>
+                        <div className="d-flex justify-content-start gap-3">
+                            <Button variant="outline-secondary" size="lg" onClick={() => setShowMenu(true)} className="px-4">
                                 <i className="bi bi-list"></i> Menu
                             </Button>
+                            <Button variant="outline-danger" size="lg" onClick={logout} className="px-4">Wyloguj</Button>
                         </div>
                     </div>
                 )}

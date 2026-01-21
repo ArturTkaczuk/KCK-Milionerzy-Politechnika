@@ -11,7 +11,7 @@ const AdminDashboard = () => {
 
     // Stan formularzy
     const [newSubjectName, setNewSubjectName] = useState('');
-    const [jsonFile, setJsonFile] = useState(null);
+
 
     // Formularz pytania
     const [editingQuestion, setEditingQuestion] = useState(null); // null = nowe
@@ -113,21 +113,7 @@ const AdminDashboard = () => {
         setShowQModal(true);
     };
 
-    const handleJsonUpload = async () => {
-        if (!jsonFile || !selectedSubject) return;
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-            try {
-                const data = JSON.parse(e.target.result);
-                await axios.post(`http://localhost:5000/api/subjects/${selectedSubject.slug}/questions/import`, data, { withCredentials: true });
-                alert('Pytania zaimportowane pomyślnie!');
-                fetchQuestions(selectedSubject.slug);
-            } catch (err) {
-                alert('Błąd parsowania lub przesyłania JSON: ' + err.message);
-            }
-        };
-        reader.readAsText(jsonFile);
-    };
+
 
     const handleDeleteSubject = async (id) => {
         if (!window.confirm("Czy na pewno chcesz usunąć ten przedmiot? To usunie WSZYSTKIE powiązane pytania.")) return;
@@ -193,15 +179,9 @@ const AdminDashboard = () => {
                                     <Button variant="success" onClick={() => { setEditingQuestion(null); setQForm({ content: '', answer_a: '', answer_b: '', answer_c: '', answer_d: '', correct_answer: 'A', difficulty: 1 }); setShowQModal(true); }}>
                                         + Dodaj nowe pytanie
                                     </Button>
-                                    <div className="d-flex gap-2 align-items-center ms-auto">
-                                        <Form.Control type="file" accept=".json" onChange={e => setJsonFile(e.target.files[0])} size="sm" style={{ width: '250px' }} />
-                                        <Button variant="outline-primary" onClick={handleJsonUpload} disabled={!jsonFile}>Importuj JSON</Button>
-                                    </div>
                                 </div>
 
-                                <div className="mb-2 text-muted small">
-                                    Wskazówka importu JSON: Użyj formatu <code>[{`{"content": "...", "answers": {"A":"..."}, "correct": "A", "difficulty": 1}`}, ...]</code>
-                                </div>
+
 
                                 <Table striped bordered responsive>
                                     <thead><tr><th>#</th><th>Trudność</th><th>Pytanie</th><th>Poprawna</th><th>Akcje</th></tr></thead>

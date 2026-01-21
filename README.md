@@ -80,7 +80,6 @@ Aplikacja kliencka uruchomi się na porcie `3000` (http://localhost:3000) i powi
     *   Dodawanie nowych pytań.
     *   Edycja treści, odpowiedzi i poziomu trudności istniejących pytań.
     *   Usuwanie pytań.
-*   **Import JSON**: Możliwość masowego dodawania pytań z pliku JSON.
 
 ---
 

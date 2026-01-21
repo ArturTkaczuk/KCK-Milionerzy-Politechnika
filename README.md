@@ -85,6 +85,8 @@ Aplikacja kliencka uruchomi się na porcie `3000` (http://localhost:3000) i powi
 
 ## Struktura Bazy Danych (SQLite)
 
+<img width="1023" height="587" alt="Struktura bazy danych" src="https://github.com/user-attachments/assets/02fa400c-4302-4001-adbf-eb417725401e" />
+
 Baza `backend/data/database.sqlite` zawiera tabele:
 
 *   **users**: ID, nazwa, rola (student/admin).

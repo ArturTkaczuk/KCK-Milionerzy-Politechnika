@@ -204,9 +204,9 @@ const Game = () => {
     const currentQ = questions[currentQIndex];
 
     return (
-        <Container fluid className="min-vh-100 text-white p-4" style={{ backgroundColor: 'rgba(33, 37, 41, 0.95)' }}>
-            <Row className="h-100">
-                <Col md={9} className="d-flex flex-column justify-content-center">
+        <Container fluid className="min-vh-100 text-white p-4">
+            <Row className="h-100 g-4">
+                <Col md={9} className="d-flex flex-column justify-content-center p-4 rounded" style={{ backgroundColor: 'rgba(33, 37, 41, 0.95)' }}>
                     <div className="mb-4 d-flex justify-content-between">
                         <h3>Pytanie {currentQIndex + 1}/12</h3>
                         <h3><Badge bg="secondary">Czas: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}</Badge></h3>
@@ -243,7 +243,7 @@ const Game = () => {
                     </div>
                 </Col>
 
-                <Col md={3} className="border-start border-secondary">
+                <Col md={3} className="border-start border-secondary p-4 rounded ms-md-3" style={{ backgroundColor: 'rgba(33, 37, 41, 0.95)' }}>
                     <ul className="list-group">
                         {[...MONEY_LADDER].reverse().map((amt, idx) => {
                             const realIdx = 11 - idx;

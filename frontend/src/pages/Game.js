@@ -234,16 +234,17 @@ const Game = () => {
                         ))}
                     </Row>
 
-                    <div className="mt-5 d-flex gap-3 justify-content-center align-items-center">
-                        <Button variant={lifelines.fifty ? "primary" : "secondary"} disabled={!lifelines.fifty} onClick={useFiftyFifty}>50:50</Button>
-                        <Button variant={lifelines.audience ? "primary" : "secondary"} disabled={!lifelines.audience} onClick={useAudience}>Pytanie do Publiczności</Button>
-                        <Button variant={lifelines.phone ? "primary" : "secondary"} disabled={!lifelines.phone} onClick={usePhone}>Telefon do Przyjaciela</Button>
-                        <div className="vr mx-2 bg-secondary"></div>
-                        <Button variant="danger" onClick={handleWalkAway}>Zakończ grę</Button>
+                    <div className="mt-5 d-flex flex-wrap gap-3 justify-content-center align-items-center">
+                        <Button variant={lifelines.fifty ? "primary" : "secondary"} disabled={!lifelines.fifty} onClick={useFiftyFifty} className="flex-grow-1">50:50</Button>
+                        <Button variant={lifelines.audience ? "primary" : "secondary"} disabled={!lifelines.audience} onClick={useAudience} className="flex-grow-1">Pytanie do Publiczności</Button>
+                        <Button variant={lifelines.phone ? "primary" : "secondary"} disabled={!lifelines.phone} onClick={usePhone} className="flex-grow-1">Telefon do Przyjaciela</Button>
+                        <div className="vr mx-2 bg-secondary d-none d-md-block"></div>
+                        <div className="w-100 d-md-none"></div> {/* Spacer for mobile */}
+                        <Button variant="danger" onClick={handleWalkAway} className="flex-grow-1">Zakończ grę</Button>
                     </div>
                 </Col>
 
-                <Col md={3} className="border-start border-secondary p-4 rounded ms-md-3" style={{ backgroundColor: 'rgba(33, 37, 41, 0.95)' }}>
+                <Col md={3} className="border-start border-secondary p-4 rounded" style={{ backgroundColor: 'rgba(33, 37, 41, 0.95)' }}>
                     <ul className="list-group">
                         {[...MONEY_LADDER].reverse().map((amt, idx) => {
                             const realIdx = 11 - idx;

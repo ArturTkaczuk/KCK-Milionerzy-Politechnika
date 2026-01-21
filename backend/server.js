@@ -38,7 +38,7 @@ const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes);
 
 app.get('/', (req, res) => {
-    res.send('Poly-Millionaire API Running');
+    res.send('Milionerzy PŁ API Running');
 });
 
 // Obsługa błędów

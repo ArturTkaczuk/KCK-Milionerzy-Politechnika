@@ -52,9 +52,9 @@ const WikampLogin = () => {
     };
 
     return (
-        <div className="min-vh-100 bg-light d-flex align-items-center justify-content-center">
+        <div className="min-vh-100 d-flex align-items-center justify-content-center">
             <Container style={{ maxWidth: '500px' }}>
-                <Card className="shadow-lg border-0">
+                <Card className="shadow-lg border-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
                     <Card.Header className="bg-primary text-white text-center py-4">
                         <h2 className="mb-0">Logowanie Wikamp</h2>
                     </Card.Header>

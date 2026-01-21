@@ -172,19 +172,37 @@ const Game = () => {
     if (gameState === 'loading') return <Container className="mt-5 text-center"><h2>Ładowanie gry dla przedmiotu: {slug}...</h2></Container>;
     if (gameState === 'error') return <Container className="mt-5 text-center"><Alert variant="danger">Błąd: {modalContent?.body || 'Nie udało się załadować gry.'}</Alert><Button onClick={() => navigate('/')}>Powrót</Button></Container>;
     if (gameState === 'won') return <Container className="mt-5 text-center"><div className="display-1 text-success">WYGRAŁEŚ MILION!</div><Button size="lg" className="mt-3" onClick={() => navigate('/')}>Strona Główna</Button></Container>;
-    if (gameState === 'walkaway') return <Container className="mt-5 text-center"><div className="display-1 text-primary">Koniec Gry</div><h3>Zdecydowałeś się odejść z kwotą: <span className="text-warning fw-bold">{currentQIndex > 0 ? MONEY_LADDER[currentQIndex - 1] : 0} $</span></h3><Button size="lg" className="mt-3" onClick={() => navigate('/')}>Strona Główna</Button></Container>;
+    if (gameState === 'walkaway') {
+        return (
+            <Container className="d-flex align-items-center justify-content-center min-vh-100">
+                <div className="p-5 rounded text-center text-dark" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', maxWidth: '600px', width: '100%' }}>
+                    <div className="display-1 text-primary fw-bold mb-4">Koniec Gry</div>
+                    <h3 className="mb-4">Zdecydowałeś się odejść z kwotą: <span className="text-warning fw-bold">{currentQIndex > 0 ? MONEY_LADDER[currentQIndex - 1] : 0} $</span></h3>
+                    <Button size="lg" variant="primary" className="px-5" onClick={() => navigate('/')}>Strona Główna</Button>
+                </div>
+            </Container>
+        );
+    }
     if (gameState === 'lost') {
         let score = 0;
         // Przeliczanie dla spójności wyświetlania (lub można zapisać w stanie)
         if (currentQIndex > 6) score = 40000;
         else if (currentQIndex > 1) score = 1000;
-        return <Container className="mt-5 text-center"><div className="display-1 text-danger">PRZEGRANA</div><p>Wygrywasz: {score} $</p><Button size="lg" className="mt-3" onClick={() => navigate('/')}>Strona Główna</Button></Container>;
+        return (
+            <Container className="d-flex align-items-center justify-content-center min-vh-100">
+                <div className="p-5 rounded text-center text-dark" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', maxWidth: '600px', width: '100%' }}>
+                    <div className="display-1 text-danger fw-bold mb-4">PRZEGRANA</div>
+                    <h3 className="mb-4">Wygrywasz: <span className="text-primary fw-bold">{score} $</span></h3>
+                    <Button size="lg" variant="primary" className="px-5" onClick={() => navigate('/')}>Strona Główna</Button>
+                </div>
+            </Container>
+        );
     }
 
     const currentQ = questions[currentQIndex];
 
     return (
-        <Container fluid className="min-vh-100 bg-dark text-white p-4">
+        <Container fluid className="min-vh-100 text-white p-4" style={{ backgroundColor: 'rgba(33, 37, 41, 0.95)' }}>
             <Row className="h-100">
                 <Col md={9} className="d-flex flex-column justify-content-center">
                     <div className="mb-4 d-flex justify-content-between">

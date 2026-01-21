@@ -35,10 +35,12 @@ const SubjectSelection = () => {
     };
 
     return (
-        <div className="min-vh-100 bg-light py-5">
+        <div className="min-vh-100 py-5">
             <Container>
-                <div className="d-flex align-items-center mb-4 position-relative">
-                    <h1 className="flex-grow-1 text-center m-0 display-4 fw-bold text-primary">Milionerzy PŁ</h1>
+                <div className="text-center mb-4">
+                    <div className="d-inline-block p-3 rounded" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
+                        <h1 className="m-0 display-4 fw-bold text-primary">Milionerzy PŁ</h1>
+                    </div>
                 </div>
 
                 {!user ? (
@@ -46,14 +48,17 @@ const SubjectSelection = () => {
                         <p>Przekierowanie do logowania...</p>
                     </div>
                 ) : (
-                    <div className="mb-5 text-start">
-                        <h4 className="mb-3">Witaj, <span className="text-primary">{user.name}</span> ({user.role})</h4>
-                        <div className="d-flex justify-content-start gap-3">
-                            <Button variant="outline-secondary" size="lg" onClick={() => setShowMenu(true)} className="px-4">
-                                <i className="bi bi-list"></i> Menu
-                            </Button>
-                            <Button variant="outline-danger" size="lg" onClick={logout} className="px-4">Wyloguj</Button>
+                    <div className="mb-4 p-4 rounded text-dark" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
+                        <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h4 className="m-0">Witaj, <span className="text-primary">{user.name}</span> ({user.role})</h4>
+                            <div className="d-flex gap-3">
+                                <Button variant="outline-secondary" size="lg" onClick={() => setShowMenu(true)} className="px-4">
+                                    <i className="bi bi-list"></i> Menu
+                                </Button>
+                                <Button variant="outline-danger" size="lg" onClick={logout} className="px-4">Wyloguj</Button>
+                            </div>
                         </div>
+                        <h3>Wybierz przedmiot</h3>
                     </div>
                 )}
 
@@ -62,12 +67,10 @@ const SubjectSelection = () => {
                         <Button variant="dark" size="lg" onClick={() => navigate('/admin')}>Panel Administratora</Button>
                     </div>
                 )}
-
-                <h3 className="mb-3">Wybierz przedmiot</h3>
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {subjects.map(subject => (
                         <Col key={subject.id}>
-                            <Card className="h-100 shadow-sm hover-effect" onClick={() => handleSubjectClick(subject.slug)} style={{ cursor: 'pointer', transition: 'transform 0.2s' }}>
+                            <Card className="h-100 shadow-sm hover-effect border-0" onClick={() => handleSubjectClick(subject.slug)} style={{ cursor: 'pointer', transition: 'transform 0.2s', backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
                                 <Card.Body className="d-flex flex-column justify-content-center align-items-center p-5 text-center">
                                     <Card.Title className="fs-3">{subject.name}</Card.Title>
                                     <Button variant="primary" className="mt-3 stretched-link">Rozpocznij grę</Button>
@@ -81,10 +84,10 @@ const SubjectSelection = () => {
                         </Col>
                     )}
                 </Row>
-            </Container>
+            </Container >
 
             <SidebarMenu show={showMenu} handleClose={() => setShowMenu(false)} />
-        </div>
+        </div >
     );
 };
 

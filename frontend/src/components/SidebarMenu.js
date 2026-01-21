@@ -30,7 +30,7 @@ const SidebarMenu = ({ show, handleClose }) => {
     };
 
     return (
-        <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas show={show} onHide={handleClose} placement="end">
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Menu Główne</Offcanvas.Title>
             </Offcanvas.Header>

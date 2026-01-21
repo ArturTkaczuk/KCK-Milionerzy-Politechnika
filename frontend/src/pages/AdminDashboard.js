@@ -127,7 +127,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        <Container fluid className="min-vh-100 bg-light py-4">
+        <Container fluid className="min-vh-100 py-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
             <Container>
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h2>Panel Administratora</h2>

@@ -1,6 +1,6 @@
 # Milionerzy PŁ
 
-Gra "Milionerzy PŁ" to interaktywna aplikacja edukacyjna stworzona na wzór popularnego teleturnieju. Projekt został zrealizowany w ramach przedmiotu **Komunikacja Człowiek-Komputer**.
+Gra "Milionerzy PŁ" to gra webowa stworzona na wzór popularnego teleturnieju. Projekt został zrealizowany w ramach przedmiotu **Komunikacja Człowiek-Komputer**.
 
 Głównym celem aplikacji jest sprawdzanie wiedzy studentów w formie quizu, z możliwością zarządzania pytaniami przez wykładowców (administratorów).
 
@@ -15,6 +15,8 @@ Głównym celem aplikacji jest sprawdzanie wiedzy studentów w formie quizu, z m
 
 **Backend:**
 - **Node.js + Express.js**: Serwer aplikacji obsługujący logikę aplikacji oraz API.
+
+**Baza Danych:**
 - **SQLite**: Lekka, plikowa baza danych do przechowywania użytkowników, pytań i wyników.
 
 ---
@@ -30,8 +32,8 @@ Aby uruchomić projekt na lokalnej maszynie, wykonaj poniższe kroki.
 
 ### 1. Pobranie projektu
 ```bash
-git clone https://github.com/ArturTkaczuk/KCK-Milionerzy
-cd "Milionerzy PŁ"
+git clone https://github.com/ArturTkaczuk/KCK-Milionerzy-Politechnika
+cd "KCK-Milionerzy-Politechnika"
 ```
 
 ### 2. Konfiguracja Backend'u
@@ -70,11 +72,11 @@ Aplikacja kliencka uruchomi się na porcie `3000` (http://localhost:3000) i powi
         *   Phone a Friend (Telefon do przyjaciela).
     *   Możliwość wycofania się z gry z obecną wygraną.
 *   **Menu Boczne**:
-    *   **Globalny Ranking**: Lista najlepszych wyników wszystkich graczy.
+    *   **Ranking graczy**: Lista najlepszych wyników wszystkich graczy.
     *   **Historia Gier**: Szczegółowy podgląd własnych rozgrywek, w tym poprawności odpowiedzi na każde pytanie.
 
 ### Dla Wykładowcy (Administrator)
-*   **Panel Administratora**: Dostępny po zalogowaniu jako wykładowca (`Lecturer`).
+*   **Panel Administratora**: Dostępny po zalogowaniu jako wykładowca.
 *   **Zarządzanie Przedmiotami**: Tworzenie i usuwanie przedmiotów (kategorii quizów).
 *   **Edytor Pytań**:
     *   Dodawanie nowych pytań.

@@ -1,3 +1,8 @@
+/**
+ * Server Entry Point
+ * Configures Express, Middleware, and Routes.
+ */
+
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -8,45 +13,57 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Programy pośredniczące (Middleware)
+// --- Middleware Configuration ---
+
 app.use(cors({
     origin: function (origin, callback) {
-        // Pozwól na żądania bez 'origin' (np. aplikacje mobilne lub postman)
+        // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
 
-        // Sprawdź czy origin jest dozwolony (localhost lub LAN IP na porcie 3000)
-        // Dla uproszczenia developerskiego, pozwalamy na wszystko co kończy się na :3000
-        if (origin.endsWith(':3000')) {
+        // Allow:
+        // 1. Localhost (standard dev)
+        // 2. Local LAN IPs (192.168.x.x) for testing on other devices
+        // 3. Any origin running on port 3000 (React default)
+        const isAllowed =
+            origin.endsWith(':3000') ||
+            origin.includes('192.168.') ||
+            origin.includes('localhost') ||
+            origin.includes('127.0.0.1');
+
+        if (isAllowed) {
             return callback(null, true);
         } else {
-            // W trybie developerskim pozwólmy na wszystko (niebezpieczne na prod!)
-            // Lepsze rozwiązanie: sprawdź czy to IP z sieci lokalnej (192.168.x.x)
-            if (origin.includes('192.168.') || origin.includes('localhost') || origin.includes('127.0.0.1')) {
-                return callback(null, true);
-            }
-            return callback(new Error('Not allowed by CORS'));
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
         }
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
+// --- Routes ---
+
 const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes);
 
+// is running Check
 app.get('/', (req, res) => {
     res.send('Milionerzy PŁ API Running');
 });
 
-// Obsługa błędów
+// --- Global Error Handler ---
+
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    console.error('[ServerError]', err.stack);
     res.status(500).send('Something broke!');
 });
 
+// --- Start Server ---
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Allowed CORS origins: Localhost, 192.168.x.x, *.3000`);
 });

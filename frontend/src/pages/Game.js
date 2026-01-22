@@ -1,5 +1,11 @@
+/**
+ * Component: Game
+ * Description: Main game controller.
+ * Handles the game loop, timer, lifelines, and score submission.
+ */
+
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button, ProgressBar, Modal, Badge, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Badge, Alert, Modal } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -27,17 +33,20 @@ const Game = () => {
         fetchGame();
     }, [slug]);
 
+    // Timer Logic: Decrement every second if game is active
     useEffect(() => {
         if (gameState !== 'playing') return;
+
         const interval = setInterval(() => {
             setTimer(prev => {
                 if (prev <= 1) {
-                    endGame('lost');
+                    endGame('lost'); // Auto-lose when time expires
                     return 0;
                 }
                 return prev - 1;
             });
         }, 1000);
+
         return () => clearInterval(interval);
     }, [gameState]);
 
